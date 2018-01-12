@@ -2,8 +2,11 @@ class ProductsController < ApplicationController
 require "csv"
 
 def index
+  @herp = Product.first
   @products = Product.paginate(page: params[:page]) 
-  end
+  @search = Product.search(params[:q])
+  @products = @search.result
+end
 
   def show
     @products = Product.find(params[:id])
