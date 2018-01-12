@@ -1,0 +1,25 @@
+
+<h1>All Products</h1>
+ 
+<table>
+  <tr>
+    <th>SKU</th>
+    <th>UPC</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+ 
+<%= will_paginate %>
+
+<% @products.each do |p| %>
+  <tr>
+    <td><%= p.sku %></td>
+    <td><%= p.upc %></td>
+  </tr>
+<% end %>
+</table>
+ 
+<%= will_paginate %>
+
+<br>

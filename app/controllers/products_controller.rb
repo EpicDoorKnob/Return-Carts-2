@@ -1,12 +1,16 @@
 class ProductsController < ApplicationController
 require "csv"
 
+def index
+  @products = Product.paginate(page: params[:page]) 
+  end
+
   def show
-    @product = Product.find(params[:id])
+    @products = Product.find(params[:id])
   end
 
   def new
-    @product = Product.new
+    @products = Product.new
   end
 
   def create
@@ -16,12 +20,8 @@ require "csv"
       Product.find_by(sku: row[:sku]).update_attribute(:upc, row[:upc])
         else
       Product.create!(row.to_h)
-  end
-end
-
-  def index
-    @product = Product.all 
+      end
   end
 
-end
+  end
 end

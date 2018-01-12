@@ -3,6 +3,8 @@
 <div>
 <%= form_tag products_path, multipart: true do %>
 <%= file_field_tag :file %>
-<%= submit_tag "Import SKU CSV"%>
+<%= submit_tag "Uplaod CSV" %>
+
 <%end%>
+<% root_path %>
 </div>

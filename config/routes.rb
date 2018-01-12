@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'products/new'
   get  '/help',    to: 'static_pages#help'
   get  '/addsku', to: 'products#new'
+  get  '/index', to: 'products#index'
   resources :products
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
