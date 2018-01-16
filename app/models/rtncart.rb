@@ -1,2 +1,0 @@
-class Rtncart < ApplicationRecord
-end
