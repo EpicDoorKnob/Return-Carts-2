@@ -1,0 +1,19 @@
+<%= form_with do |form| %>
+
+
+<h1> New Cart</h1>
+
+<div class="field">
+    <%= form.label :user_id %>
+    <%= form.label :user_id, id: :cart_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :muid %>
+    <%= form.text_field :muid, id: :cart_muid %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <% end %>
