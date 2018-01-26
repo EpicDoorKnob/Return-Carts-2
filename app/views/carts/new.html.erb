@@ -1,11 +1,10 @@
 <%= form_with do |form| %>
 
-
 <h1> New Cart</h1>
 
 <div class="field">
-    <%= form.label :user_id %>
-    <%= form.label :user_id, id: :cart_user_id %>
+    <%= form.label @cart.user %>
+    <%= form.label @cart.user, id: :current_user %>
   </div>
 
   <div class="field">
