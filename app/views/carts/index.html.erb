@@ -1,1 +1,30 @@
-<h1> There are <%= @carts.count %> cart(s)</h1>
+<h1> You've loaded <%= @your_carts.count %> carts </h1>
+<%= form_with do |form| %>
+<h2> New Cart</h2>
+
+  <h2 class="actions">
+    <%= form.submit "Start Loading Cart" %>
+  </h2>
+  <% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cart_ID</th>
+      <th>MUID</th>
+      <th>Created Date/Time</th>
+      <th>Working On</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @your_carts.each do |cart| %>
+  <tr>
+  <td> <%= cart.id %> </td>
+  <td> <%= cart.muid %> </td>
+  <td> <%= cart.updated_at %> </td>
+  <td> <%= cart.active %> </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+

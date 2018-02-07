@@ -1,0 +1,39 @@
+<h1> Load Cart # <%= @current_cart_id %></h1>
+
+<table>
+<tr>
+<th>UPC</th>
+<th>SKU</th>
+<th>Position</th>
+<th>Qty</th>
+</tr>
+<% @current_totes.each do |totes| %>
+    <tr>
+    <td> <%= totes.product.upc %> </td>
+    <td> <%= totes.product.sku %> </td>
+    <td> <%= totes.position %> </td>
+    <td> <%= totes.qty %> </td>
+</tr>
+<% end %>
+</table>
+<%= form_with(model:@tote) do |form| %>
+<div>
+</div>
+
+<div class="field">
+    <%= form.label :product_id %>
+    <%= form.text_field :product_id %>
+  </div>
+  <div class="field">
+    <%= form.label :position %>
+    <%= form.text_field :position %>
+  </div>
+  <div class="field">
+    <%= form.label :qty %>
+    <%= form.text_field :qty %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Add Product to Cart" %>
+  </div>
+  <% end %>
+  

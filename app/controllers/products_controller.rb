@@ -26,6 +26,6 @@ end
       Product.create!(row.to_h)
       end
   end
-
+      redirect_to products_path
   end
 end

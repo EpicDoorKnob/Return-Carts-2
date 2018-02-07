@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123054537) do
+ActiveRecord::Schema.define(version: 20180202053443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20180123054537) do
     t.string "muid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
@@ -35,6 +36,17 @@ ActiveRecord::Schema.define(version: 20180123054537) do
     t.string "sku_type"
     t.integer "composition_quantity"
     t.index ["sku"], name: "index_products_on_sku", unique: true
+  end
+
+  create_table "totes", force: :cascade do |t|
+    t.bigint "cart_id"
+    t.bigint "product_id"
+    t.string "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "qty"
+    t.index ["cart_id"], name: "index_totes_on_cart_id"
+    t.index ["product_id"], name: "index_totes_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,4 +67,6 @@ ActiveRecord::Schema.define(version: 20180123054537) do
   end
 
   add_foreign_key "carts", "users"
+  add_foreign_key "totes", "carts"
+  add_foreign_key "totes", "products"
 end

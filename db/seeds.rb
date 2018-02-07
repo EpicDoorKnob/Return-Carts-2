@@ -9,3 +9,4 @@
 # static admin user
 
 User.create(email: "mark@simpleglobal.com", password: "123456789", password_confirmation: "123456789")
+User.create(email: "jeff@simpleglobal.com", password: "123456789", password_confirmation: "123456789")

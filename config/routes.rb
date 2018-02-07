@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   get   '/carts',               to: 'carts#index'
   get   '/carts/cart',          to: 'carts#cart'
   post  '/carts/new',           to: 'carts#create'
+  post  '/totes/new',           to: 'totes#create'
 
   resources :products
   resources :carts
+  resources :totes
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
