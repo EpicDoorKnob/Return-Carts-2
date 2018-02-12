@@ -1,12 +1,7 @@
 <h1> You've loaded <%= @your_carts.count %> carts </h1>
 <%= form_with do |form| %>
-<h2> New Cart</h2>
-
-  <h2 class="actions">
-    <%= form.submit "Start Loading Cart" %>
-  </h2>
+<h2><%= form.submit "Start Loading Cart", class: "btn btn-md btn-primary"%></h2>
   <% end %>
-
 <table>
   <thead>
     <tr>

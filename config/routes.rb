@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get   '/carts/cart',          to: 'carts#cart'
   post  '/carts/new',           to: 'carts#create'
   post  '/totes/new',           to: 'totes#create'
+  post  '/carts/edit',          to: 'carts#edit'
 
   resources :products
   resources :carts

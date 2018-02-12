@@ -1,5 +1,5 @@
 <h1> Load Cart # <%= @current_cart_id %></h1>
-
+<h2> Unique SKUs <%= @unique_skus %> </h2>
 <table>
 <tr>
 <th>UPC</th>
@@ -33,7 +33,6 @@
     <%= form.text_field :qty %>
   </div>
   <div class="actions">
-    <%= form.submit "Add Product to Cart" %>
+    <%= form.submit "Add Product to Cart", class: "btn btn-md btn-primary"%>  <% end %> <%= link_to "Save Cart", edit_cart_path(@current_cart_id), class: "btn btn-md btn-primary" %>
   </div>
-  <% end %>
-  
+ 
