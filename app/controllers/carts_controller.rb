@@ -22,7 +22,7 @@ class CartsController < ApplicationController
       @cart.size = 25
       @cart.save
       if @cart.save
-        flash.keep[:danger]="Cart created with MUID #{@cart.muid}"
+        flash.keep[:success]="You created cart #{current_user.carts.where(active: "true").first.id}!"
         redirect_to new_tote_path  
       end
     else

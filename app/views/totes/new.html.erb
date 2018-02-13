@@ -21,16 +21,12 @@
 </div>
 
 <div class="field">
-    <%= form.label :product_id %>
-    <%= form.text_field :product_id %>
+    <%= label_tag :product_upc %>
+    <%= text_field_tag :product_upc %>
   </div>
   <div class="field">
     <%= form.label :position %>
     <%= form.text_field :position %>
-  </div>
-  <div class="field">
-    <%= form.label :qty %>
-    <%= form.text_field :qty %>
   </div>
   <div class="actions">
     <%= form.submit "Add Product to Cart", class: "btn btn-md btn-primary"%>  <% end %> <%= link_to "Save Cart", edit_cart_path(@current_cart_id), class: "btn btn-md btn-primary" %>

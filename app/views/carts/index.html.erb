@@ -1,7 +1,9 @@
+<div class="center jumbotron">
 <h1> You've loaded <%= @your_carts.count %> carts </h1>
 <%= form_with do |form| %>
 <h2><%= form.submit "Start Loading Cart", class: "btn btn-md btn-primary"%></h2>
   <% end %>
+</div>
 <table>
   <thead>
     <tr>
@@ -22,4 +24,5 @@
   <% end %>
   </tbody>
 </table>
+</html>
 

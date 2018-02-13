@@ -5,8 +5,12 @@ require 'json'
   end
 
     def create
+        @current_cart_id = current_user.carts.where(active: "true").first.id
+        @upc = Product.find_by(upc: params[:product_upc])
         @tote = Tote.new(tote_params)
+        @tote.product_id = @upc.id
         @tote.cart_id = current_user.carts.where(active: "true").first.id
+        @tote.qty = Tote.where(cart_id: @current_cart_id).pluck(:product_id).count(Tote.where(cart_id: @current_cart_id).pluck(:product_id).last) + 1
         @tote.save 
         flash[:success]="#{current_user.carts.where(active: "true").first.totes.last.product.sku} goes in position
                                         #{current_user.carts.where(active: "true").first.totes.last.position}"
@@ -18,10 +22,6 @@ require 'json'
         @current_cart_id = current_user.carts.where(active: "true").first.id
         @current_totes = Tote.where(cart_id: @current_cart_id)
         @unique_skus = @current_totes.pluck(:position).uniq.count
-       # @bean = Cart.where(id: @current_cart_id)
-       # @bean.active = "false"
-       # @bean.save
-       # redirect_to carts_path
     end
 
     def show
@@ -31,8 +31,7 @@ require 'json'
     private
 
     def tote_params
-        # params.require(:tote).permit(:cart_id, :product_id, :position, :qty)
-        params.require(:tote).permit(:product_id, :position, :qty)
+        params.require(:tote).permit(:position, :qty)
     end
 
 end
