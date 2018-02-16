@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-    require 'CSV'
+    require 'csv'
     validates :sku, presence: true, uniqueness: true
     has_many :totes
 end
