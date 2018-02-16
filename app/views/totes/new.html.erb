@@ -1,5 +1,7 @@
 <h1> Load Cart # <%= @current_cart_id %></h1>
-<h2> There are <%= @current_cart.size %> spots in this cart. <%= link_to "Change Size", cart_path(@current_cart_id), class: "btn btn-md btn-primary" %> </h2>
+<h2> There are <%= @current_cart.size %> positions in this cart. 
+<div> <%= link_to "Change Size", cart_path(@current_cart_id), class: "btn btn-sm btn-primary" %> </div>
+</h2>
 <table>
 <tr>
 <th>UPC</th>
@@ -16,19 +18,15 @@
 </tr>
 <% end %>
 </table>
-<%= form_with(model:@tote) do |form| %>
+<%= form_with(model:@tote) %>
 <div>
 </div>
 
 <div class="field">
     <%= label_tag "Scan UPC" %>
-    <%= text_field_tag :product_upc %>
+    <%= text_field_tag :product_upc, '', autofocus: true %>
   </div>
-  <div class="field">
-    <%= form.label :position %>
-    <%= form.text_field :position %>
-  </div>
+
   <div class="actions">
-    <%= form.submit "Add Product to Cart", class: "btn btn-md btn-primary"%>  <% end %> <%= link_to "Save Cart", edit_cart_path(@current_cart_id), class: "btn btn-md btn-primary" %>
+    <%= submit_tag "Add Product to Cart", class: "btn btn-md btn-primary"%>  <%= link_to "Save Cart", edit_cart_path(@current_cart_id), class: "btn btn-md btn-primary" %>
   </div>
- 
