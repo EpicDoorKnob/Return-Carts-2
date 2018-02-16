@@ -1,5 +1,5 @@
 <h1> Load Cart # <%= @current_cart_id %></h1>
-<h2> Unique SKUs <%= @unique_skus %> </h2>
+<h2> There are <%= @current_cart.size %> spots in this cart. <%= link_to "Change Size", cart_path(@current_cart_id), class: "btn btn-md btn-primary" %> </h2>
 <table>
 <tr>
 <th>UPC</th>
@@ -21,7 +21,7 @@
 </div>
 
 <div class="field">
-    <%= label_tag :product_upc %>
+    <%= label_tag "Scan UPC" %>
     <%= text_field_tag :product_upc %>
   </div>
   <div class="field">

@@ -7,6 +7,7 @@ class CartsController < ApplicationController
   end
 
   def show
+    @current_cart = current_user.carts.where(active: "true").first
   end
 
   def new
@@ -16,7 +17,7 @@ class CartsController < ApplicationController
   def create
     @has_active_cart = current_user.carts.where(active: "true").first
     if @has_active_cart.blank?
-      @cart = current_user.carts.new(cart_params)
+      @cart = current_user.carts.new(make_cart)
       @cart.active = "TRUE"
       @cart.muid = "N/A"
       @cart.size = 25
@@ -33,13 +34,22 @@ class CartsController < ApplicationController
   end
 
     def edit
-      @current_cart_id = current_user.carts.where(active: "true").first
-      @cart = Cart.where(id: @current_cart_id).first
+      @cart = current_user.carts.where(active: "true").first
       @cart.update_attributes(active: FALSE)
-      @cart.save
       redirect_to carts_path
     end
-    
+
+    def update
+      @current_cart = current_user.carts.where(active: "true").first
+      if @current_cart.update_attributes(cart_params)
+        flash.keep[:success]="Your cart's size is now #{@current_cart.size}"
+        redirect_to new_tote_path
+      else
+        redirect_to show_cart_path(@current_cart_id)
+      end
+    end
+
+
   private
 
   def boop
@@ -47,6 +57,10 @@ class CartsController < ApplicationController
   end
 
   def cart_params
+    params.require(:cart).permit(:size)
+  end
+
+  def make_cart
     params.permit
   end
 end

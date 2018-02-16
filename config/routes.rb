@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   post  '/carts/new',           to: 'carts#create'
   post  '/totes/new',           to: 'totes#create'
   post  '/carts/edit',          to: 'carts#edit'
-
   resources :products
   resources :carts
   resources :totes
