@@ -8,6 +8,12 @@ class CartsController < ApplicationController
 
   def show
     @current_cart = current_user.carts.where(active: "true").first
+    @current_totes = Tote.where(cart_id: @current_cart.id)
+    @big_totes = @current_totes.pluck(:position).uniq
+    @span = @current_totes.where(position: @big_totes).pluck(:qty)
+    @sock = @big_totes.map(&:to_i)
+
+    # @plan = @current_totes.where(position: @big_totes).each.to_a.pluck(:qty).max
   end
 
   def new
@@ -42,7 +48,7 @@ class CartsController < ApplicationController
     def update
       @current_cart = current_user.carts.where(active: "true").first
       if @current_cart.update_attributes(cart_params)
-        flash.keep[:success]="Your cart's size is now #{@current_cart.size}"
+        flash.keep[:success]="Your cart has been updated!"
         redirect_to new_tote_path
       else
         redirect_to show_cart_path(@current_cart_id)
@@ -57,7 +63,7 @@ class CartsController < ApplicationController
   end
 
   def cart_params
-    params.require(:cart).permit(:size)
+    params.require(:cart).permit(:size, :muid)
   end
 
   def make_cart

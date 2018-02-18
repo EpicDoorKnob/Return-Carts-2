@@ -13,7 +13,7 @@ def create
   @tote.product_id = @upc.id
   if @upc.id.present?
     @tote.cart_id = current_user.carts.where(active: "true").first.id
-    @tote.qty = Tote.where(cart_id: @current_cart_id).pluck(:product_id).count(@tote.product_id) + 1
+    @tote.qty = Tote.where(cart_id: @current_cart_id).pluck(:product_id).count(@tote.product_id).to_i + 1
       if Tote.where(cart_id: @current_cart_id).pluck(:product_id).include?(@upc.id)
         @tote.position = Tote.where(cart_id: @current_cart_id).where(product_id: @upc.id).first.position
       else

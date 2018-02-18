@@ -1,11 +1,26 @@
-<h1>Edit Cart <%= @current_cart_id %> <%= @current_cart %></h1>
+<h1>Cart <%= @current_cart.id %></h1>
 <div></div>
 
   <%= form_for @current_cart do |f| %>
-
   <%= f.label :size %>
   <%= f.text_field :size %>
   <div></div>
-  <%= f.submit "Update Size", class: "btn btn-primary" %>
-
+  <%= f.label :muid %>
+  <%= f.text_field :muid %>
+  <div></div>
+    <%= f.submit "Update Cart", class: "btn btn-primary" %>
   <% end %>
+
+<table>
+<tr>
+<th>SKU</th>
+<th>Qty</th>
+<th>Position</th>
+</tr>
+<% @big_totes.each do |suck| %>
+    <td> <%= @current_totes.where(position: suck).first.product.sku %></td>
+    <td> <%= @current_totes.where(position: suck).pluck(:qty).max %> </td>
+    <td> <%= suck %> </td>
+</tr>
+<% end %>
+</table>
