@@ -5,6 +5,10 @@ def index
 @totes = Tote.all 
 end
 
+def show
+    params[:id]
+end
+
 def create
   @current_totes = Tote.where(cart_id: @current_cart_id)
   @current_cart_id = current_user.carts.where(active: "true").first.id
@@ -47,11 +51,16 @@ def create
     def show
     end
 
+    def destroy
+        @tote.destroy
+        redirect_to new_tote_path
+    end
+
 
     private
 
     def tote_params
-        params.permit
+        params.permit(:id)
     end
 
 end

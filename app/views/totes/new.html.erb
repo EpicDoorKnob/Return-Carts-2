@@ -8,13 +8,15 @@
 <th>SKU</th>
 <th>Position</th>
 <th>Qty</th>
+<th></th>
 </tr>
 <% @current_totes.each do |totes| %>
     <tr>
     <td> <%= totes.product.upc %> </td>
     <td> <%= totes.product.sku %> </td>
     <td> <%= totes.position %> </td>
-    <td> <%= totes.qty %> </td>
+    <td> <%= totes.qty %></td>
+    <td><%= link_to 'Delete', tote_path(totes.id) %> </td>
 </tr>
 <% end %>
 </table>
@@ -28,5 +30,9 @@
   </div>
 
   <div class="actions">
-    <%= submit_tag "Add Product to Cart", class: "btn btn-md btn-primary"%>  <%= link_to "Save Cart", edit_cart_path(@current_cart_id), class: "btn btn-md btn-primary" %>
+    <% if @current_totes.pluck(:position).max.to_i < Cart.where(id: @current_cart_id).first.size.to_i %>
+    <%= submit_tag "Add Product to Cart", class: "btn btn-md btn-primary"%>
+    <% else %>
+    <%= link_to "Finish Cart", cart_path(@current_cart_id), class: "btn btn-md btn-primary" %>
+    <% end %>
   </div>

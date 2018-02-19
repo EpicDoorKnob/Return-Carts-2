@@ -1,0 +1,4 @@
+<h1> <%= Tote.where(id: params[:id]).first.product.sku %> has been removed. </h1>
+<h2> <%= link_to "Your Carts", new_tote_path , class: "btn btn-lg btn-primary" %> </h2>
+<% Tote.where(id: params[:id]).first.destroy %>
+
