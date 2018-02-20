@@ -13,6 +13,11 @@ def create
   @current_totes = Tote.where(cart_id: @current_cart_id)
   @current_cart_id = current_user.carts.where(active: "true").first.id
   @upc = Product.find_by(upc: params[:product_upc])
+  @already_tote = @current_totes.where(product_id: @upc)
+  if @already_tote.present?
+    @already_tote.qty =  @already_tote.qty + 1
+    @already_tote.qty.save
+  else
   @tote = Tote.new(tote_params)
   @tote.product_id = @upc.id
   if @upc.id.present?
@@ -37,10 +42,13 @@ def create
         end
         else
       end
+      end
     else
     end
   
     def new
+        @current_totes = Tote.where(cart_id: @current_cart_id)
+        @already_tote = @current_totes.where(product_id: 2).count
         @tote = Tote.new
         @current_cart_id = current_user.carts.where(active: "true").first.id
         @current_cart = current_user.carts.where(active: "true").first
@@ -49,6 +57,8 @@ def create
     end
 
     def show
+      @current_cart_id = current_user.carts.where(active: "true").first.id
+      @current_totes = Tote.where(cart_id: @current_cart_id)
     end
 
     def destroy

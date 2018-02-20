@@ -23,6 +23,9 @@
     <td> <%= suck %> </td>
 </tr>
 <% end %>
+<td><h3>Total</h3></td>
+<td><h3><%= @current_totes.count %></h3></td>
+<td></td>
 </table>
 
 <%= link_to "Save Cart", edit_cart_path(params[:id]), class: "btn btn-md btn-primary" %>
