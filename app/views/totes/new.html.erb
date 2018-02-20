@@ -30,7 +30,7 @@
   </div>
 
   <div class="actions">
-  <% if @current_totes.pluck(:position).max.to_i <= Cart.where(id: @current_cart_id).first.size.to_i %>  
+  <% if Tote.where(cart_id: @current_cart_id).pluck(:product_id).uniq.count < Cart.where(id: @current_cart_id).first.size.to_i %>  
     <%= submit_tag "Add Product to Cart", class: "btn btn-md btn-primary"%>
     <% else %>
     <%= link_to "Finish Cart", cart_path(@current_cart_id), class: "btn btn-md btn-primary" %>
