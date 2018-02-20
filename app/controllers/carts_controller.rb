@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   def index
-    @carts = Cart.all
+    @carts = Cart.all.paginate(page: params[:page], per_page: 20)
     @your_carts = current_user.carts.all
     @muid_holder = current_user.email
     @cart_muid = current_user.carts.where(active: "true").first
