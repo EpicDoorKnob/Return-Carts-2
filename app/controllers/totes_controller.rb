@@ -1,76 +1,61 @@
 class TotesController < ApplicationController
-require 'json'
-
-def index
-@totes = Tote.all 
-end
-
-def show
-    params[:id]
-end
-
-def create
-  @current_totes = Tote.where(cart_id: @current_cart_id)
-  @current_cart_id = current_user.carts.where(active: "true").first.id
-  @upc = Product.find_by(upc: params[:product_upc])
-  @already_tote = @current_totes.where(product_id: @upc)
-  if @already_tote.present?
-    @already_tote.qty =  @already_tote.qty + 1
-    @already_tote.qty.save
-  else
-  @tote = Tote.new(tote_params)
-  @tote.product_id = @upc.id
-  if @upc.id.present?
+  require 'json'
+  
+  def index
+  @totes = Tote.all 
+  end
+  
+  def show
+      params[:id]
+  end
+  
+  def create
+    @current_totes = Tote.where(cart_id: @current_cart_id)
+    @current_cart_id = current_user.carts.where(active: "true").first.id
+    @upc = Product.find_by(upc: params[:product_upc])
+    @tote = Tote.new(tote_params)
+    @tote.product_id = @upc.id
     @tote.cart_id = current_user.carts.where(active: "true").first.id
     @tote.qty = Tote.where(cart_id: @current_cart_id).pluck(:product_id).count(@tote.product_id).to_i + 1
-      if Tote.where(cart_id: @current_cart_id).pluck(:product_id).include?(@upc.id)
-        @tote.position = Tote.where(cart_id: @current_cart_id).where(product_id: @upc.id).first.position
-      else
-        if Tote.where(cart_id: @current_cart_id).blank?
-          @tote.position = 1
-        else
-          @tote.position = Tote.where(cart_id: @current_cart_id).pluck(:position).max.to_i + 1
-        end
-      end
-        if @tote.position.to_i > current_user.carts.where(active: "true").first.size
-          flash[:danger]="You cannot add any more product to this cart!"
-          redirect_to new_tote_path and return
-        end
-        if @tote.save
-          flash[:success]="Position #{current_user.carts.where(active: "true").first.totes.last.position}"
-          redirect_to new_tote_path
-        end
-        else
-      end
-      end
+    if Tote.where(cart_id: @current_cart_id).where(product_id: Product.find_by(upc: params[:product_upc])).present?
+      @tote.position = Tote.where(cart_id: @current_cart_id).where(product_id: Product.find_by(upc: params[:product_upc])).last.position
     else
+      @tote.position = Tote.where(cart_id: @current_cart_id).pluck(:product_id).uniq.count + 1
     end
-  
-    def new
-        @current_totes = Tote.where(cart_id: @current_cart_id)
-        @already_tote = @current_totes.where(product_id: 2).count
-        @tote = Tote.new
-        @current_cart_id = current_user.carts.where(active: "true").first.id
-        @current_cart = current_user.carts.where(active: "true").first
-        @current_totes = Tote.where(cart_id: @current_cart_id)
-        @unique_skus = @current_totes.pluck(:position).uniq.count
-    end
-
-    def show
-      @current_cart_id = current_user.carts.where(active: "true").first.id
-      @current_totes = Tote.where(cart_id: @current_cart_id)
-    end
-
-    def destroy
-        @tote.destroy
+      if @tote.position.to_i > current_user.carts.where(active: "true").first.size
+        flash[:danger]="You cannot add any more product to this cart!"
+        redirect_to new_tote_path and return
+      end
+      if @tote.save
+        flash[:success]="Position #{current_user.carts.where(active: "true").first.totes.last.position}"
         redirect_to new_tote_path
-    end
-
-
-    private
-
-    def tote_params
-        params.permit(:id)
-    end
-
-end
+      end
+  end
+      def new
+          @current_totes = Tote.where(cart_id: @current_cart_id)
+          @already_tote = @current_totes.where(product_id: 2).count
+          @tote = Tote.new
+          @current_cart_id = current_user.carts.where(active: "true").first.id
+          @current_cart = current_user.carts.where(active: "true").first
+          @current_totes = Tote.where(cart_id: @current_cart_id)
+          @unique_skus = @current_totes.pluck(:position).uniq.count
+      end
+  
+      def show
+        @current_cart_id = current_user.carts.where(active: "true").first.id
+        @current_totes = Tote.where(cart_id: @current_cart_id)
+      end
+  
+      def destroy
+          @tote.destroy
+          redirect_to new_tote_path
+      end
+  
+      private
+  
+      def tote_params
+          params.permit(:id)
+      end
+  
+  end
+  
