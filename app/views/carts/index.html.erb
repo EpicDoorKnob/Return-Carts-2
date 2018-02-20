@@ -8,7 +8,7 @@
   <thead>
     <tr>
     <%= will_paginate %>
-      <th>Cart_ID</th>
+      <th>Cart Number</th>
       <th>MUID</th>
       <th>Created Date/Time</th>
       <th>Working On</th>
@@ -17,7 +17,7 @@
   <tbody>
   <% @your_carts.each do |cart| %>
   <tr>
-  <td> <%= cart.id %> </td>
+  <td> <%= link_to "Cart #{cart.id}", cart_path(cart.id) %></td>
   <td> <%= cart.muid %> </td>
   <td> <%= cart.updated_at %> </td>
   <td> <%= cart.active %> </td>

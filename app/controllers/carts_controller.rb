@@ -7,11 +7,16 @@ class CartsController < ApplicationController
   end
 
   def show
+    @cart = Cart.find(params[:id])
     @current_cart = current_user.carts.where(active: "true").first
-    @current_totes = Tote.where(cart_id: @current_cart.id)
-    @big_totes = @current_totes.pluck(:position).uniq
-    @span = @current_totes.where(position: @big_totes).pluck(:qty)
-    @sock = @big_totes.map(&:to_i)
+    @current_totes = if @current_cart.present?
+      Tote.where(cart_id: @current_cart.id)
+      else
+    end
+    @big_totes = if @current_cart.present?
+      @current_totes.pluck(:position).uniq
+    else
+    end
 
     # @plan = @current_totes.where(position: @big_totes).each.to_a.pluck(:qty).max
   end

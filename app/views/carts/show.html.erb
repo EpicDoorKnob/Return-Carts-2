@@ -1,14 +1,17 @@
-<h1>Cart <%= @current_cart.id %></h1>
+<h1>Cart <%= @cart.id %></h1>
 <div></div>
 
-  <%= form_for @current_cart do |f| %>
+  <%= form_for @cart do |f| %>
   <%= f.label :size %>
   <%= f.text_field :size %>
   <div></div>
   <%= f.label :muid %>
   <%= f.text_field :muid %>
   <div></div>
+  <% if @cart.active?%>
     <%= f.submit "Update Cart", class: "btn btn-primary" %>
+  <% else %>
+  <% end %>
   <% end %>
 
 <table>
@@ -17,16 +20,20 @@
 <th>Qty</th>
 <th>Position</th>
 </tr>
-<% @big_totes.each do |suck| %>
-    <td> <%= @current_totes.where(position: suck).first.product.sku %></td>
-    <td> <%= @current_totes.where(position: suck).pluck(:qty).max %> </td>
-    <td> <%= suck %> </td>
+<% @cart.totes.pluck(:position).uniq.each do |scoop| %>
+<tr>
+    <td> <%= @cart.totes.where(position: scoop.to_i).first.product.sku %></td>
+    <td> <%= @cart.totes.where(position: scoop.to_i).pluck(:qty).max %> </td>
+    <td> <%= scoop %> </td>
 </tr>
 <% end %>
 <td><h3>Total</h3></td>
-<td><h3><%= @current_totes.count %></h3></td>
+<td><h3><%= @cart.totes.count %></h3></td>
 <td></td>
 </table>
-
+<div></div>
+<% if @cart.active?%>
 <%= link_to "Save Cart", edit_cart_path(params[:id]), class: "btn btn-md btn-primary" %>
+<% else %>
+<% end %>
 
