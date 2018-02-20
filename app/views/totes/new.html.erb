@@ -15,7 +15,7 @@
     <td> <%= totes.product.upc %> </td>
     <td> <%= totes.product.sku %> </td>
     <td> <%= totes.position %> </td>
-    <td> <%= totes.qty %></td>
+    <td> <%= @current_totes.where(product_id: totes.product).last.qty %></td>
     <td><%= link_to 'Delete', tote_path(totes.id) %> </td>
 </tr>
 <% end %>
