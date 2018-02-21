@@ -14,4 +14,11 @@
 //= require bootstrap
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
+//= require_tree
+//= require clipboard
+$(document).on("turbolinks:load",function(){  
+
+  var clipboard = new Clipboard('.clipboard-btn');
+  console.log(clipboard);
+
+});

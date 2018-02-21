@@ -22,7 +22,7 @@
 </tr>
 <% @cart.totes.pluck(:position).uniq.each do |scoop| %>
 <tr>
-    <td> <%= @cart.totes.where(position: scoop.to_i).first.product.sku %></td>
+    <td> <input id="FuckJava-<%= scoop %>" value="<%= @cart.totes.where(position: scoop.to_i).first.product.sku %>"> <button class="btn clipboard-btn btn-primary" data-clipboard-target="#FuckJava-<%= scoop %>"> <%= image_tag "clippy", size:"16x16" %> </button> </td>
     <td> <%= @cart.totes.where(position: scoop.to_i).pluck(:qty).max %> </td>
     <td> <%= scoop %> </td>
 </tr>
