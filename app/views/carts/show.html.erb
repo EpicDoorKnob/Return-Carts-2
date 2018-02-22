@@ -23,7 +23,11 @@
 <% @cart.totes.pluck(:position).uniq.each do |scoop| %>
 <tr>
     <td> <input id="FuckJava-<%= scoop %>" value="<%= @cart.totes.where(position: scoop.to_i).first.product.sku %>"> <button class="btn clipboard-btn btn-primary" data-clipboard-target="#FuckJava-<%= scoop %>"> <%= image_tag "clippy.svg", size:"16x16" %> </button> </td>
-    <td> <%= @cart.totes.where(position: scoop.to_i).pluck(:qty).max %> </td>
+    <% if @cart.totes.where(position: scoop.to_i).pluck(:qty).max > 1 %>
+    <td bgcolor="#28a745"> <b><%= @cart.totes.where(position: scoop.to_i).pluck(:qty).max %> <b> </td>
+    <% else %>
+    <td> <b> <%= @cart.totes.where(position: scoop.to_i).pluck(:qty).max %> <b> </td>
+    <% end %>
     <td> <%= scoop %> </td>
 </tr>
 <% end %>

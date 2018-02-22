@@ -1,10 +1,20 @@
 <% provide(:title, 'AddSKU') %>
+<div class="center jumbotron">
 <h1>Add SKUs</h1>
-
+<h3> To add new SKUs, follow the steps below <h3>
+<div></div>
+<h2>
+<div>1. Go to the<a href="https://one.simpleglobal.com/admin/product/getAllSku" target="_blank"> manage all SKUs</a> page in ONE admin.</div>
+<div>2. Filter what company's SKUs you would like to upload. </div>
+<div>3. Change the "All Type" filter to only show "Master" SKUs. </div>
+<div>4. Press the green "Export Sku" button at the bottom of the page. </div>
+<div>5. Use the "Choose File" button on this page to select the file you just exported from ONE. Then Press the "Upload CSV" button on this page.</div>
+</h2>
+</div>
 <div>
 <%= form_tag products_path, multipart: true do %>
 <%= file_field_tag :file %>
-<%= submit_tag "Uplaod CSV" %>
+<%= submit_tag "Upload CSV" %>
 
 <%end%>
 </div>

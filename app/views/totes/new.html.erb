@@ -1,6 +1,5 @@
 <h1> Load Cart <%= @current_cart_id %> </h1>
 <h2> There are <%= @current_cart.size %> positions in this cart. 
-<div> <%= link_to "Change Size", cart_path(@current_cart_id), class: "btn btn-sm btn-primary" %> </div>
 </h2>
 <table>
 <tr>
@@ -35,4 +34,5 @@
     <% else %>
     <%= link_to "Finish Cart", cart_path(@current_cart_id), class: "btn btn-md btn-primary" %>
     <% end %>
+    <%= link_to "Edit Cart", cart_path(@current_cart_id), class: "btn btn-md btn-primary" %>
   </div>
