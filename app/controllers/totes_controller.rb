@@ -12,13 +12,13 @@ class TotesController < ApplicationController
   def create
     @current_totes = Tote.where(cart_id: @current_cart_id)
     @current_cart_id = current_user.carts.where(active: "true").first.id
-    @upc = Product.find_by(upc: params[:product_upc])
+    @upc = Product.where('sku = ? or upc = ?', params[:product_upc], params[:product_upc]).first
     @tote = Tote.new(tote_params)
     @tote.product_id = @upc.id
     @tote.cart_id = current_user.carts.where(active: "true").first.id
     @tote.qty = Tote.where(cart_id: @current_cart_id).pluck(:product_id).count(@tote.product_id).to_i + 1
-    if Tote.where(cart_id: @current_cart_id).where(product_id: Product.find_by(upc: params[:product_upc])).present?
-      @tote.position = Tote.where(cart_id: @current_cart_id).where(product_id: Product.find_by(upc: params[:product_upc])).last.position
+    if Tote.where(cart_id: @current_cart_id).where(product_id: Product.where('sku = ? or upc = ?', params[:product_upc], params[:product_upc]).first).present?
+      @tote.position = Tote.where(cart_id: @current_cart_id).where(product_id: Product.where('sku = ? or upc = ?', params[:product_upc], params[:product_upc]).first).last.position
     else
       @tote.position = Tote.where(cart_id: @current_cart_id).pluck(:product_id).uniq.count + 1
     end
