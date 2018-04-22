@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get   '/products/new'
   get   '/help',                to: 'static_pages#help'
+  get   '/home',                to: 'static_pages#home'
   get   '/products/addsku',     to: 'products#new'
   get   '/products/index',      to: 'products#index'
   get   '/carts',               to: 'carts#index'
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   resources :products
   resources :carts
   resources :totes
-  root  'carts#index'
+  root  'static_pages#home'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

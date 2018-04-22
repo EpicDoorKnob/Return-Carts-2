@@ -1,4 +1,6 @@
 class CartsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @carts = Cart.all.paginate(page: params[:page], per_page: 20)
     @your_carts = current_user.carts.all

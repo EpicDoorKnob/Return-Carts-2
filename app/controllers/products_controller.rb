@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-require "csv"
+  before_action :authenticate_user!
+  require "csv"
 
 def cart
   @last = Product.last
