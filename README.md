@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application was made with Ruby on Rails!
 
-Things you may want to cover:
+If you have a lot of products and need to sort similar products into boxes/containers...
 
-* Ruby version
+This is the app for you!
 
-* System dependencies
+You can find it at https://returncartmerk.herokuapp.com/
 
-* Configuration
+Everyone in the world can log in with (just to check things out):
+test@does.work
+123456
 
-* Database creation
+If you want your own account email mark@does.work and he might make you one "3
+________________________________________________________________________________________
 
-* Database initialization
+How to get this app working:
 
-* How to run the test suite
+Things you need 
 
-* Services (job queues, cache servers, search engines, etc.)
+ruby 2.5.1
+rails 5.1.4
+postgres (db)
 
-* Deployment instructions
-
-* ...
+* Bundle
+* Rails db:create db:migrate db:seed (for test@does.work/123456 user)
