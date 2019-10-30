@@ -35,7 +35,7 @@ gem 'bcrypt', '3.1.11'
 gem 'jquery-rails'
 gem 'coffee-script-source', '1.8.0'
 gem 'bootstrap-sass', '3.3.7'
-gem 'devise', '~> 4.4'
+gem 'devise', '~> 4.7'
 gem 'clipboard-rails'
 
 gem 'will_paginate', '3.1.6'
